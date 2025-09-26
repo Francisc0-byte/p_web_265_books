@@ -3,6 +3,9 @@ import Writer from '#models/writer'
 
 export const WriterFactory = factory
   .define(Writer, async ({ faker }) => {
-    return {}
+    return {
+      lastname: faker.person.lastName(),
+      firstname: faker.person.firstName(),
+    }
   })
   .build()
