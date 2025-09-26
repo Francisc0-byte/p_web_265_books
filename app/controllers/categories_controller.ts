@@ -5,12 +5,6 @@ export default class CategoriesController {
    * Display a list of resource
    */
   async index({}: HttpContext) {}
-
-  /**
-   * Display form to create a new record
-   */
-  async create({}: HttpContext) {}
-
   /**
    * Handle form submission for the create action
    */
@@ -25,11 +19,6 @@ export default class CategoriesController {
    * Edit individual record
    */
   async edit({ params }: HttpContext) {}
-
-  /**
-   * Handle form submission for the edit action
-   */
-  async update({ params, request }: HttpContext) {}
 
   /**
    * Delete record
