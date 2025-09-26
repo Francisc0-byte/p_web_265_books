@@ -8,5 +8,5 @@ export default class Writer extends BaseModel {
   declare lastname: string
 
   @column()
-  declare firstname: number
+  declare firstname: string
 }
