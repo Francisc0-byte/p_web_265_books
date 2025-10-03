@@ -7,10 +7,13 @@
 |
 */
 
+import WritersController from '#controllers/writers_controller'
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
   return {
-    hello: 'world',
+    hello: 'Api is Working',
   }
 })
+
+router.resource('writers', WritersController).apiOnly()
