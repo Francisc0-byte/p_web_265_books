@@ -9,12 +9,12 @@ export default class extends BaseSchema {
 
       //Ajout des colonnes 
       table.string('title').unique()
-      table.integer('numberOfPages')
-      table.string('pdfLink').unique()
-      table.string('abstract').notNullable
-      table.string('Editor').notNullable
-      table.string('editionYear').notNullable
-      table.string('imagePath').notNullable
+      table.integer('number_of_Pages')
+      table.string('pdf_link').unique()
+      table.string('abstract').notNullable()
+      table.string('editor').notNullable()
+      table.integer('edition_year').notNullable()
+      table.string('image_path').notNullable()
 
       table.timestamp('created_at')
       table.timestamp('updated_at')
