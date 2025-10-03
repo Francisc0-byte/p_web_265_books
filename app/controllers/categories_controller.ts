@@ -1,7 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Category from '#models/category'
 import {categoryValidator} from '#validators/category'
-import { isLabeledStatement } from 'typescript'
 export default class CategoriesController {
   /**
    * Display a list of resource
