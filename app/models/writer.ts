@@ -1,4 +1,6 @@
-import { BaseModel, column } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
+import Book from './book.js'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Writer extends BaseModel {
   @column({ isPrimary: true })
@@ -9,4 +11,7 @@ export default class Writer extends BaseModel {
 
   @column()
   declare firstname: string
+
+  @hasMany(() => Book)
+  declare books: HasMany<typeof Book>
 }
