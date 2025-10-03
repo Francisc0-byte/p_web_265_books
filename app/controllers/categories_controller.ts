@@ -30,9 +30,9 @@ export default class CategoriesController {
    /**
    * Handle form submission for the edit action
    */
-  async update({ params,}: HttpContext) {
-
-
+  async update({ params,request,response}: HttpContext) {
+    const {label}=await request.validateUsing(categoryValidator)
+    return response.ok(label)
   }
   /**
    * Delete record
