@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import Category from '#models/category'
 import {categoryValidator} from '#validators/category'
+import { isLabeledStatement } from 'typescript'
 export default class CategoriesController {
   /**
    * Display a list of resource
@@ -32,14 +33,16 @@ export default class CategoriesController {
    */
   async update({ params,request,response}: HttpContext) {
     const {label}=await request.validateUsing(categoryValidator)
-    return response.ok(label)
+    const category = await Category.findByOrFail(params.id)
+    category.merge({label})
+    await category.save()
+    return response.ok({category})
   }
   /**
    * Delete record
    */
   async destroy({ params }: HttpContext) {
     const category= await Category.findOrFail(params.id)
-
     return await category.delete()
     }
 }
