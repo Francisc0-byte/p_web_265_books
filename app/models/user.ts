@@ -6,8 +6,8 @@ import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
-  uids: ['email'],
-  passwordColumnName: 'password',
+  uids: ['username'],
+  passwordColumnName: 'hashPassword',
 })
 
 export default class User extends compose(BaseModel, AuthFinder) {
@@ -17,7 +17,7 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare username: string | null
 
-  @column({ serializeAs: null })
+  @column({ })
   declare hashPassword: string
 
   @column()
