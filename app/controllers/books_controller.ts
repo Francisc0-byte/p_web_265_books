@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import Book from "#models/book"
-import { request } from 'http'
+//import { request } from 'http'
 import { bookValidator } from '#validators/book'
 
 export default class BooksController {
@@ -38,27 +38,40 @@ export default class BooksController {
     return response.created(book)
   }
 
-  async show({}: HttpContext) {
+  async show({params, response}: HttpContext) {
     //return await Book.findByOrFail(params.id)
+    const book = await Book.findOrFail(params.id)
+
+    return response.ok(book)
   }
 
-  async update({request, params}: HttpContext) {
+  async update({request, params, response}: HttpContext) {
     // Mettre à jour un livre
-    const data = request.only(['title', 'Editor', 'editionYear'])
+    const data = request.only([
+      'title',
+      'numberOfPages',
+      'pdfLink',
+      'abstract',
+      'editor',
+      'editionYear',
+      'imagePath',
+    ])
     // Vérification de l'existance du livre
-    const book = await Book.findByOrFail(params.id)
+    const book = await Book.findOrFail(params.id)
     // Mise à jour des données du livre
     book.merge(data)
     // Sauvegarde des modifications
     await book.save()
     // Retour le json de l'élève mis à jour
-    return book
+    return response.ok(book)
   }
 
-  async destroy({params}: HttpContext) {
+  async destroy({params, response}: HttpContext) {
     // Vérification de l'existance du livre
-    const book = await Book.findByOrFail(params.id)
+    const book = await Book.findOrFail(params.id)
     // Supression du livre
     return await book.delete()
+
+    return response.noContent()
   }
 }
