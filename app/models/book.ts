@@ -12,7 +12,7 @@ export default class Book extends BaseModel {
   declare numberOfPages: number
 
   @column()
-  declare pdfLink: string
+  declare pdfLink: string //C'est un lien HTTPS vers une autre page 
 
   @column()
   declare abstract: string
@@ -21,10 +21,10 @@ export default class Book extends BaseModel {
   declare editor: string
 
   @column()
-  declare editionYear: string // Peut-être number
+  declare editionYear: number 
 
   @column()
-  declare imagePath: string
+  declare imagePath: string // C'est une image
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

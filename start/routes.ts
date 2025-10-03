@@ -18,11 +18,11 @@ router.resource('book', BooksController).apiOnly()
 
 /* est équivalent à :
 router.group(() => {
- router.get('', [StudentsController, 'index'])
- router.get(':id', [StudentsController, 'show'])
- router.post('', [StudentsController, 'store'])
- router.put(':id', [StudentsController, 'update'])
- router.patch(':id', [StudentsController, 'update'])
- router.delete(':id', [StudentsController, 'destroy'])
-}).prefix('students')
+ router.get('', [BooksController, 'index'])
+ router.get(':id', [BooksController, 'show'])
+ router.post('', [BooksController, 'store'])
+ router.put(':id', [BooksController, 'update'])
+ router.patch(':id', [BooksController, 'update'])
+ router.delete(':id', [BooksController, 'destroy'])
+}).prefix('books')
 */

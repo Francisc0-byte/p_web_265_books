@@ -2,19 +2,40 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 import Book from "#models/book"
 import { request } from 'http'
+import { bookValidator } from '#validators/book'
 
 export default class BooksController {
 
-  async index({}: HttpContext) {
-    return await Book.query().orderBy('title').orderBy('editor')
+  async index({ response}: HttpContext) {
+    //Correspond à la requête HTTP get / book
+    const book = await Book.query()
+      .orderBy('title')
+      .orderBy('numberOfPages')
+      .orderBy('pdfLink')
+      .orderBy('abstract')
+      .orderBy('editor')
+      .orderBy('editionYear')
+      .orderBy('imagePath')
+    console.log(book.length)
+    return response.ok(book)
   }
 
-  async store({request}: HttpContext) {
+  async store({request, response}: HttpContext) {
     // Récupération des données envoyées par le client
-    // On utilise `request.only` pour ne récupérer que les champs nécessaires
-    const book = request.only(['title', 'Editor', 'editionYear'])
+    // Récupère les données envoyés par le client et validation des données
+    const {title, numberOfPages, pdfLink, abstract, editor, editionYear, imagePath} = await request.validateUsing(bookValidator)
+    // Création du livre avec les données validées
+    const book = await Book.create({
+      title,
+      numberOfPages,
+      pdfLink,
+      abstract,
+      editor,
+      editionYear,
+      imagePath,
+    })
     // Création d'un nouveau livre avec les données récupérées
-    return await Book.create(book)
+    return response.created(book)
   }
 
   async show({}: HttpContext) {

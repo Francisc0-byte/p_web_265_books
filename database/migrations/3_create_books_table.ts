@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
 
       //Ajout des colonnes 
-      table.string('Title').unique()
+      table.string('title').unique()
       table.integer('numberOfPages')
       table.string('pdfLink').unique()
       table.string('abstract').notNullable
