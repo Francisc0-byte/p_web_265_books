@@ -7,12 +7,10 @@
 |
 */
 
-import CategoriesController from '#controllers/categories_controller'
 import router from '@adonisjs/core/services/router'
 
 router.get('/', async () => {
-  return 'Api is working'
+  return {
+    hello: 'world',
+  }
 })
-
-router.resource('category',CategoriesController).apiOnly()
-
