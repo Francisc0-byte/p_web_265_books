@@ -2,6 +2,8 @@ import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from './user.js'
 import Category from './category.js'
+import { write } from 'fs'
+import Writer from './writer.js'
 
 export default class Book extends BaseModel {
   @column({ isPrimary: true })
@@ -34,4 +36,7 @@ export default class Book extends BaseModel {
   // Relation : book -> user
   @belongsTo(() => User)
   declare user: BelongsTo<typeof User>
+
+  @belongsTo(()=> Writer)
+  declare writer:BelongsTo<typeof Writer>
 }

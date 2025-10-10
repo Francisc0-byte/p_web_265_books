@@ -1,6 +1,6 @@
-import { BaseModel, column, hasOne, /*hasOne*/ } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, hasOne, /*hasOne*/ } from '@adonisjs/lucid/orm'
 import Book from './book.js'
-import type { HasOne } from '@adonisjs/lucid/types/relations'
+import type { HasMany } from '@adonisjs/lucid/types/relations'
 
 export default class Category extends BaseModel {
   @column({ isPrimary: true })
@@ -11,6 +11,6 @@ export default class Category extends BaseModel {
   declare label:string
   //relation: 1 Book ->
 
-  @hasOne(()=>Book)
-  declare book: HasOne<typeof Book>
+  @hasMany(()=>Book)
+  declare book: HasMany<typeof Book>
 }
