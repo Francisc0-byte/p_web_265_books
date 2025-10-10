@@ -2,7 +2,6 @@ import { BaseModel, belongsTo, column } from '@adonisjs/lucid/orm'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import User from './user.js'
 import Category from './category.js'
-import { write } from 'fs'
 import Writer from './writer.js'
 
 export default class Book extends BaseModel {
@@ -30,6 +29,16 @@ export default class Book extends BaseModel {
   @column()
   declare imagePath: string // C'est une image
 
+  
+  @column()
+  declare categoryId: number
+  
+  @column()
+  declare userId: number
+  
+  @column()
+  declare writerId: number
+
   // Relation book -> category
   @belongsTo(() => Category)
   declare category: BelongsTo<typeof Category>
@@ -39,4 +48,6 @@ export default class Book extends BaseModel {
 
   @belongsTo(()=> Writer)
   declare writer:BelongsTo<typeof Writer>
+
+
 }
