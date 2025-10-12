@@ -7,16 +7,17 @@ import { bookValidator } from '#validators/book'
 export default class BooksController {
 
   async index({ response}: HttpContext) {
+    console.log("TEST")
     //Correspond à la requête HTTP get / book
+
+    
     const book = await Book.query()
-      .orderBy('title')
-      .orderBy('numberOfPages')
-      .orderBy('pdfLink')
-      .orderBy('abstract')
-      .orderBy('editor')
-      .orderBy('editionYear')
-      .orderBy('imagePath')
+      .orderBy('title').preload('category')
+      .preload('user')
+      .preload('writer')
     console.log(book.length)
+    
+   //const book = {}
     return response.ok(book)
   }
 

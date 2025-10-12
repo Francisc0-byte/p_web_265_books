@@ -19,7 +19,10 @@ router.get('/', async () => {
     hello: 'Api is Working',
   }
 })
-  router.resource('books',BooksController).apiOnly()
+  router.resource('/api/books',BooksController).apiOnly()
+  router.resource('/api/writers', WritersController).apiOnly()
+  router.resource('/api/category', CategoriesController).apiOnly()
+  router.resource('/api/users', UsersController).apiOnly()
 
 router.group(()=>{
   router.resource('writers', WritersController).apiOnly()
@@ -28,4 +31,3 @@ router.group(()=>{
 
 })
 .prefix('books/:books_id')
-

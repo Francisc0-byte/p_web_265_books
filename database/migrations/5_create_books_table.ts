@@ -16,6 +16,28 @@ export default class extends BaseSchema {
       table.integer('edition_year').notNullable()
       table.string('image_path').notNullable()
 
+      table
+      .integer('category_id')
+      .unsigned()
+      .references('id')
+      .inTable('categories')
+      //.onDelete('CASCADE')
+
+      table
+      .integer('writer_id')
+      .unsigned()
+      .references('id')
+      .inTable('writers')
+      //.onDelete('CASCADE')
+      
+      table
+      .integer('user_id')
+      .unsigned()
+      .references('id')
+      .inTable('users')
+      //.onDelete('CASCADE')
+      
+      
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })
