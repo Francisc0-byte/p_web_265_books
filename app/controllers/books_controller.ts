@@ -1,30 +1,30 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
-import Book from "#models/book"
+import Book from '#models/book'
 //import { request } from 'http'
 import { bookValidator } from '#validators/book'
 
 export default class BooksController {
-
-  async index({ response}: HttpContext) {
-    console.log("TEST")
+  async index({ response }: HttpContext) {
+    console.log('TEST')
     //Correspond à la requête HTTP get / book
 
-    
     const book = await Book.query()
-      .orderBy('title').preload('category')
+      .orderBy('title')
+      .preload('category')
       .preload('user')
       .preload('writer')
     console.log(book.length)
-    
-   //const book = {}
+
+    //const book = {}
     return response.ok(book)
   }
 
-  async store({request, response}: HttpContext) {
+  async store({ request, response }: HttpContext) {
     // Récupération des données envoyées par le client
     // Récupère les données envoyés par le client et validation des données
-    const {title, numberOfPages, pdfLink, abstract, editor, editionYear, imagePath} = await request.validateUsing(bookValidator)
+    const { title, numberOfPages, pdfLink, abstract, editor, editionYear, imagePath } =
+      await request.validateUsing(bookValidator)
     // Création du livre avec les données validées
     const book = await Book.create({
       title,
@@ -39,13 +39,13 @@ export default class BooksController {
     return response.created(book)
   }
 
-  async show({params, response}: HttpContext) {
+  async show({ params, response }: HttpContext) {
     //return await Book.findByOrFail(params.id)
     const book = await Book.findOrFail(params.id)
     return response.ok(book)
   }
 
-  async update({request, params, response}: HttpContext) {
+  async update({ request, params, response }: HttpContext) {
     // Mettre à jour un livre
     const data = request.only([
       'title',
@@ -67,11 +67,11 @@ export default class BooksController {
     return response.ok(book)
   }
 
-  async destroy({params, response}: HttpContext) {
+  async destroy({ params, response }: HttpContext) {
     // Vérification de l'existance du livre
     const book = await Book.findOrFail(params.id)
     // Supression du livre
-    return await book.delete()
+    await book.delete()
 
     return response.noContent()
   }

@@ -7,8 +7,7 @@ export default class WritersController {
    * Affiche les Writers
    */
   async index({ response }: HttpContext) {
-    const writers = await Writer.query().orderBy('lastname')
-    .orderBy('firstname').preload('books')
+    const writers = await Writer.query().orderBy('lastname').orderBy('firstname').preload('books')
     console.log(writers.length)
     return response.ok(writers)
   }
@@ -49,10 +48,11 @@ export default class WritersController {
     return response.ok(writer)
   }
 
-  async destroy({ params }: HttpContext) {
+  async destroy({ params, response }: HttpContext) {
     //vérification de l'existance
     const writer = await Writer.findOrFail(params.id)
 
-    return await writer.delete()
+    await writer.delete()
+    return response.noContent()
   }
 }
