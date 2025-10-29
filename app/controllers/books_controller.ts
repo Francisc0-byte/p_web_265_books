@@ -42,7 +42,6 @@ export default class BooksController {
   async show({params, response}: HttpContext) {
     //return await Book.findByOrFail(params.id)
     const book = await Book.findOrFail(params.id)
-
     return response.ok(book)
   }
 
@@ -63,6 +62,7 @@ export default class BooksController {
     book.merge(data)
     // Sauvegarde des modifications
     await book.save()
+    await book.load('user')
     // Retour le json de l'élève mis à jour
     return response.ok(book)
   }

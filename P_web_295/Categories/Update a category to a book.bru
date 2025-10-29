@@ -1,11 +1,11 @@
 meta {
-  name: Get one book
+  name: Update a category to a book
   type: http
-  seq: 2
+  seq: 8
 }
 
-get {
-  url: http://localhost:3333/api/books/2
+put {
+  url: http://localhost:3333/books/1/category/1
   body: none
   auth: inherit
 }

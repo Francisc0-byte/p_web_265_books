@@ -1,11 +1,11 @@
 meta {
-  name: Delete a Writer
+  name: Delete a Writer to a book
   type: http
-  seq: 9
+  seq: 10
 }
 
 delete {
-  url: http://localhost:3333/api/writers/1
+  url: http://localhost:3333/books/1/writers/3
   body: none
   auth: inherit
 }

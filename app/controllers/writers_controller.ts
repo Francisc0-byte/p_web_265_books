@@ -7,7 +7,8 @@ export default class WritersController {
    * Affiche les Writers
    */
   async index({ response }: HttpContext) {
-    const writers = await Writer.query().orderBy('lastname').orderBy('firstname')
+    const writers = await Writer.query().orderBy('lastname')
+    .orderBy('firstname').preload('books')
     console.log(writers.length)
     return response.ok(writers)
   }

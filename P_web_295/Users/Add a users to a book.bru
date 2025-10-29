@@ -1,11 +1,11 @@
 meta {
-  name: Add a users
+  name: Add a users to a book
   type: http
-  seq: 5
+  seq: 6
 }
 
 post {
-  url: http://localhost:3333/api/users
+  url: http://localhost:3333/books/1/users/1
   body: json
   auth: inherit
 }

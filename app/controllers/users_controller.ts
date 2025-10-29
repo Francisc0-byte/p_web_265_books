@@ -24,7 +24,7 @@ export default class UsersController {
    * Show individual record
    */
   async show({ params,response }: HttpContext) {
-        const user = await User.query().where('id',params.id).firstOrFail()
+        const user = (await User.query().where('id',params.id).preload('book').firstOrFail())
         return response.ok(user)
   }
   /**
