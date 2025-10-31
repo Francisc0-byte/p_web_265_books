@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, hasMany, hasOne } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import { DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
 import Book from './book.js'
@@ -21,23 +21,23 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare username: string | null
 
-  @column({ })
+  @column({})
   declare hashPassword: string
 
   @column()
-  declare isAdmin :boolean
+  declare isAdmin: boolean
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
-  
-  @hasMany(()=> Book)
+
+  @hasMany(() => Book)
   declare book: HasMany<typeof Book>
 
-  @hasMany(()=>Comment)
-  declare comment:HasMany<typeof Comment>
+  @hasMany(() => Comment)
+  declare comment: HasMany<typeof Comment>
 
-  @hasMany(()=> Evaluate)
-  declare user:HasMany<typeof Evaluate>
+  @hasMany(() => Evaluate)
+  declare user: HasMany<typeof Evaluate>
 
   static accessTokens = DbAccessTokensProvider.forModel(User)
 }

@@ -7,17 +7,17 @@ export default class Comment extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
 
-    @column()
-  declare bookId:number
+  @column()
+  declare bookId: number
 
   @column()
-  declare userId:number
+  declare userId: number
 
-    @belongsTo(()=>Book)
-    declare book:BelongsTo<typeof Book>
-  
-    @belongsTo(()=>User)
-    declare user:BelongsTo<typeof User>
+  @belongsTo(() => Book)
+  declare book: BelongsTo<typeof Book>
+
+  @belongsTo(() => User)
+  declare user: BelongsTo<typeof User>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
