@@ -47,19 +47,20 @@ export default class BooksController {
 
   async update({ request, params, response }: HttpContext) {
     // Mettre à jour un livre
-    const data = request.only([
-      'title',
-      'numberOfPages',
-      'pdfLink',
-      'abstract',
-      'editor',
-      'editionYear',
-      'imagePath',
-    ])
+    const { title, numberOfPages, pdfLink, abstract, editor, editionYear, imagePath } =
+      await request.validateUsing(bookValidator)
     // Vérification de l'existance du livre
     const book = await Book.findOrFail(params.id)
     // Mise à jour des données du livre
-    book.merge(data)
+    book.merge({
+      title,
+      numberOfPages,
+      pdfLink,
+      abstract,
+      editor,
+      editionYear,
+      imagePath,
+    })
     // Sauvegarde des modifications
     await book.save()
     await book.load('user')

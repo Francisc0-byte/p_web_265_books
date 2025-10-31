@@ -37,11 +37,11 @@ export default class WritersController {
 
   async update({ params, request, response }: HttpContext) {
     //Récuperation des données
-    const data = request.only(['lastname', 'firstname'])
+    const { lastname, firstname } = await request.validateUsing(writerValidator)
     //Vérification de l'existance du Writer
     const writer = await Writer.findOrFail(params.id)
     //Mise à our des données
-    writer.merge(data)
+    writer.merge({ lastname, firstname })
     //sauvegarde des modifications
     await writer.save()
 
