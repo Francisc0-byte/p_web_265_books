@@ -32,4 +32,5 @@ router
   })
   .prefix('books/:books_id')
 
-router.get('categories/:category_id/books', [BooksController, 'indexByCatagory'])
+//Route Imbriqué permettant de trouver tous les livres par categories
+router.get('category/:category_id/books', [BooksController, 'indexByCatagory'])
