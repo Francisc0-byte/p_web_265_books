@@ -75,4 +75,6 @@ export default class BooksController {
 
     return response.noContent()
   }
+
+  async indexByCatagory({ params, response }: HttpContext) {}
 }

@@ -19,15 +19,17 @@ router.get('/', async () => {
     hello: 'Api is Working',
   }
 })
-  router.resource('/api/books',BooksController).apiOnly()
-  router.resource('/api/writers', WritersController).apiOnly()
-  router.resource('/api/category', CategoriesController).apiOnly()
-  router.resource('/api/users', UsersController).apiOnly()
+router.resource('/api/books', BooksController).apiOnly()
+router.resource('/api/writers', WritersController).apiOnly()
+router.resource('/api/category', CategoriesController).apiOnly()
+router.resource('/api/users', UsersController).apiOnly()
 
-router.group(()=>{
-  router.resource('writers', WritersController).apiOnly()
-  router.resource('category', CategoriesController).apiOnly()
-  router.resource('users', UsersController).apiOnly()
+router
+  .group(() => {
+    router.resource('writers', WritersController).apiOnly()
+    router.resource('category', CategoriesController).apiOnly()
+    router.resource('users', UsersController).apiOnly()
+  })
+  .prefix('books/:books_id')
 
-})
-.prefix('books/:books_id')
+router.get('categories/:category_id/books', [BooksController, 'indexByCatagory'])
