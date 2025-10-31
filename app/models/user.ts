@@ -27,6 +27,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column()
   declare isAdmin: boolean
 
+  @column()
+ declare role: string // Ce champ sera utilisé dans la prochaine étape pour la gestion des rôles.
+
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
 

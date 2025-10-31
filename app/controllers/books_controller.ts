@@ -4,6 +4,7 @@ import Book from '#models/book'
 //import { request } from 'http'
 import { bookValidator } from '#validators/book'
 
+
 export default class BooksController {
   async index({ response }: HttpContext) {
     //Correspond à la requête HTTP get / book
@@ -22,8 +23,9 @@ export default class BooksController {
   async store({ request, response }: HttpContext) {
     // Récupération des données envoyées par le client
     // Récupère les données envoyés par le client et validation des données
-    const { title, numberOfPages, pdfLink, abstract, editor, editionYear, imagePath } =
-      await request.validateUsing(bookValidator)
+    const { title, numberOfPages, pdfLink, abstract, editor, editionYear, imagePath, userId } =
+      await request.validateUsing(bookValidator) // Ajout Jess userId
+
     // Création du livre avec les données validées
     const book = await Book.create({
       title,
@@ -33,6 +35,7 @@ export default class BooksController {
       editor,
       editionYear,
       imagePath,
+      userId, // Ajout de userId
     })
     // Création d'un nouveau livre avec les données récupérées
     return response.created(book)
@@ -77,7 +80,7 @@ export default class BooksController {
   }
 
   //Index permettant de indexer les livres par catégories
-  async indexByCatagory({ params, response }: HttpContext) {
+  async indexByCategory({ params, response }: HttpContext) {
     const category = params.category_id
 
     const booksByCategory = await Book.query().where('category_id', category).preload('category')

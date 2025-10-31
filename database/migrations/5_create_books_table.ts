@@ -15,12 +15,12 @@ export default class extends BaseSchema {
       table.string('editor').notNullable()
       table.integer('edition_year').notNullable()
       table.string('image_path').notNullable()
-
+      
       table
-      .integer('category_id')
+      .integer('category_id') // Pourquoi category avec y
       .unsigned()
       .references('id')
-      .inTable('categories')
+      .inTable('categories') // pourquoi avec ies
       //.onDelete('CASCADE')
 
       table
