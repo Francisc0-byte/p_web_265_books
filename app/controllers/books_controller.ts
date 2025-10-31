@@ -76,5 +76,12 @@ export default class BooksController {
     return response.noContent()
   }
 
-  async indexByCatagory({ params, response }: HttpContext) {}
+  //Index permettant de indexer les livres par catégories
+  async indexByCatagory({ params, response }: HttpContext) {
+    const category = params.category_id
+
+    const booksByCategory = await Book.query().where('category_id', category).preload('category')
+
+    return response.ok(booksByCategory)
+  }
 }
