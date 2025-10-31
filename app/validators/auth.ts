@@ -1,6 +1,7 @@
 import vine from '@vinejs/vine'
 
-export const loginValidator = vine.compile( // Ajouter par Jess
+export const loginValidator = vine.compile(
+  // Ajouter par Jess
   vine.object({
     username: vine.string().minLength(3).maxLength(32),
     password: vine.string().minLength(8).maxLength(512),
