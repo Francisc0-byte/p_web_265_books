@@ -3,10 +3,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 import Book from '#models/book'
 //import { request } from 'http'
 import { bookValidator } from '#validators/book'
-import Comment from '#models/comment'
 import BookPolicy from '#policies/book_policy'
-import { messages } from '@vinejs/vine/defaults'
-
 
 export default class BooksController {
   async index({ response }: HttpContext) {
@@ -50,21 +47,22 @@ export default class BooksController {
     return response.ok(book)
   }
 
-  async update({ request, params, response, bouncer }: HttpContext) {
+  async update({ auth, request, params, response, bouncer }: HttpContext) {
     // Mettre à jour un livre
     const { title, numberOfPages, pdfLink, abstract, editor, editionYear, imagePath } =
       await request.validateUsing(bookValidator)
+    const user = await auth.authenticate()
 
     // Vérification de l'existance du livre
-    const book = await Book.query().where('id', params.id)
-      .where('User_id', params.user_id).firstOrFail()
+    const book = await Book.query().where('id', params.id).firstOrFail()
 
-    if(await bouncer.with(BookPolicy).denies('update', book)){
+    if (await bouncer.with(BookPolicy).denies('update', book)) {
       return response.unauthorized({
-        message: "Vous n'êtes pas l'auteur de ce commentaire. Vous n'avez pas le droit de le modifier"
-        ,
+        message:
+          "Vous n'êtes pas l'auteur de ce commentaire. Vous n'avez pas le droit de le modifier",
       })
     }
+
     // Mise à jour des données du livre
     book.merge({
       title,
@@ -74,8 +72,8 @@ export default class BooksController {
       editor,
       editionYear,
       imagePath,
-      })
-   
+    })
+
     // Sauvegarde des modifications
     await book.save()
     //await book.load('user')
