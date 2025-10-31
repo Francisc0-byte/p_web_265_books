@@ -9,23 +9,23 @@ export default class extends BaseSchema {
 
       table.timestamp('created_at')
       table.timestamp('updated_at')
-            //user ->commment
+      //user ->commment
       table
-      .integer('user_id')
-      .unsigned()
-      .notNullable() //important: un commentaire doit toujours être lié à un élève
-      .references('id')
-      .inTable('users')
-      .onDelete('CASCADE')
+        .integer('user_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('users')
+        .onDelete('CASCADE')
 
-//book ->commment
+      //book ->commment
       table
-      .integer('book_id')
-      .unsigned()
-      .notNullable() //important: un commentaire doit toujours être lié à un élève
-      .references('id')
-      .inTable('books')
-      .onDelete('CASCADE')
+        .integer('book_id')
+        .unsigned()
+        .notNullable()
+        .references('id')
+        .inTable('books')
+        .onDelete('CASCADE')
     })
   }
 
