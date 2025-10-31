@@ -6,7 +6,6 @@ import { bookValidator } from '#validators/book'
 
 export default class BooksController {
   async index({ response }: HttpContext) {
-    console.log('TEST')
     //Correspond à la requête HTTP get / book
 
     const book = await Book.query()
