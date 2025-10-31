@@ -1,7 +1,18 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Book from '#models/book'
+import Category from '#models/category'
+import Writer from '#models/writer'
+import User from '#models/user'
 export default class BookSeeder extends BaseSeeder {
   public async run() {
+    //Récuperation des ID de categories, users et writers
+    const categoriesId = (await Category.all()).map((cat) => cat.id)
+    const writersId = (await Writer.all()).map((writer) => writer.id)
+    const usersId = (await User.all()).map((user) => user.id)
+
+    //Const pour assigner aléatoirement les Id dans les livres
+    const random = <T>(arr: T[]) => arr[Math.floor(Math.random() * arr.length)]
+
     await Book.createMany([
       {
         title: 'Le Petit Prince',
@@ -11,10 +22,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Éditions Gallimard',
         editionYear: 1943,
         imagePath: '/images/le-petit-prince.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
-
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: '1984',
@@ -24,9 +34,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Secker & Warburg',
         editionYear: 1949,
         imagePath: '/images/1984.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Les Misérables',
@@ -36,9 +46,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'A. Lacroix, Verboeckhoven & Cie',
         editionYear: 1862,
         imagePath: '/images/les-miserables.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Le Comte de Monte-Cristo',
@@ -48,10 +58,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Penguin Classics',
         editionYear: 1844,
         imagePath: '/images/monte-cristo.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
-
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Cyrano de Bergerac',
@@ -61,9 +70,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Éditions de la Pléiade',
         editionYear: 1897,
         imagePath: '/images/cyrano.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Madame Bovary',
@@ -73,9 +82,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Michel Lévy Frères',
         editionYear: 1856,
         imagePath: '/images/madame-bovary.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Les Fleurs du mal',
@@ -85,9 +94,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Poulet-Malassis et de Broise',
         editionYear: 1857,
         imagePath: '/images/fleurs-du-mal.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Germinal',
@@ -97,9 +106,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Charpentier',
         editionYear: 1885,
         imagePath: '/images/germinal.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'La Peste',
@@ -109,9 +118,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Gallimard',
         editionYear: 1947,
         imagePath: '/images/la-peste.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Candide',
@@ -121,9 +130,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Éditions Garnier',
         editionYear: 1759,
         imagePath: '/images/candide.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Les Trois Mousquetaires',
@@ -133,9 +142,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Perrin',
         editionYear: 1844,
         imagePath: '/images/mousquetaires.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Le Rouge et le Noir',
@@ -145,9 +154,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'A. Levavasseur',
         editionYear: 1830,
         imagePath: '/images/rouge-noir.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Notre-Dame de Paris',
@@ -157,9 +166,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Gosselin',
         editionYear: 1831,
         imagePath: '/images/notre-dame.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'La Chartreuse de Parme',
@@ -169,9 +178,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Le Normant',
         editionYear: 1839,
         imagePath: '/images/chartreuse.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Le Père Goriot',
@@ -181,9 +190,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Werdet',
         editionYear: 1835,
         imagePath: '/images/pere-goriot.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Bel-Ami',
@@ -193,9 +202,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Paul Ollendorff',
         editionYear: 1885,
         imagePath: '/images/bel-ami.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Les Misérables (abrégé)',
@@ -205,9 +214,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Hachette',
         editionYear: 2020,
         imagePath: '/images/les-miserables-abrige.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'La Condition Humaine',
@@ -217,9 +226,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Gallimard',
         editionYear: 1933,
         imagePath: '/images/condition-humaine.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Voyage au centre de la Terre',
@@ -229,9 +238,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Pierre-Jules Hetzel',
         editionYear: 1864,
         imagePath: '/images/voyage-terre.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
       {
         title: 'Le Horla',
@@ -241,9 +250,9 @@ export default class BookSeeder extends BaseSeeder {
         editor: 'Gil Blas',
         editionYear: 1887,
         imagePath: '/images/horla.jpg',
-        categoryId:1,
-        writerId:1,
-        userId:1
+        categoryId: random(categoriesId),
+        writerId: random(writersId),
+        userId: random(usersId),
       },
     ])
   }
