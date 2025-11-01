@@ -33,7 +33,7 @@ router
     router.resource('users', UsersController).apiOnly()
   })
   .prefix('books/:books_id')
-  .use(middleware.auth()) // Ajout Jess
+  .use(middleware.auth())
 
 
 //Route Imbriqué permettant de trouver tous les livres par categories

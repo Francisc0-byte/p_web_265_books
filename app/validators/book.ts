@@ -12,7 +12,7 @@ const bookValidator = vine.compile(
 
     userId: vine.number().exists(async (db, value) => {
       // Ajout Jessica
-      const user = await db.from('users').where('id', value).first() // Exemple cours avec (s) pour users
+      const user = await db.from('users').where('id', value).first() 
       // user est soit un objet (si trouvé), soit undefined (si non trouvé).
       // Explication du !!user :
       // Si user est un objet → !!user devient true

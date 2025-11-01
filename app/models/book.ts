@@ -15,7 +15,7 @@ export default class Book extends BaseModel {
   declare numberOfPages: number
 
   @column()
-  declare pdfLink: string //C'est un lien HTTPS vers une autre page
+  declare pdfLink: string 
 
   @column()
   declare abstract: string
@@ -27,7 +27,7 @@ export default class Book extends BaseModel {
   declare editionYear: number
 
   @column()
-  declare imagePath: string // C'est une image
+  declare imagePath: string 
 
   
   @column()

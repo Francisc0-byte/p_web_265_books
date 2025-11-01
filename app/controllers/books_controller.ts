@@ -77,7 +77,6 @@ export default class BooksController {
     // Sauvegarde des modifications
     await book.save()
     //await book.load('user')
-    // Retour le json de l'élève mis à jour
     return response.ok(book)
   }
 
